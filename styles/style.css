@@ -1,64 +1,80 @@
-/* Importamos los estilos base */
-@import "base.css";
-
-/* Estilos específicos para la página principal */
+@import "base.css";/* Estilos específicos para la página principal */
 .info__Section {
   position: relative;
+  width: 100%;
+  max-width: 100%;
   padding: var(--spacing-xl) 0;
   background-color: rgba(30, 35, 40, 0.8);
   margin-bottom: var(--spacing-xl);
   border: 1px solid var(--color-gray);
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-lg);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Aseguramos que el overlay de fondo tenga posicionamiento adecuado */
 .background-image-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../assets/img/backgrounds/door_dark.jpg");
+  background-image: url("../assets/img/backgrounds/drakenigth.gif");
   background-size: cover;
   background-position: center;
+  transform: scaleX(-1);
   z-index: 0;
   opacity: 0.7;
   border-radius: var(--border-radius-md);
 }
 
+.reflected-background > * {
+  transform: scaleY(-1); /* Invertir el contenido de nuevo para que se vea bien */
+}
+
+/* Aseguramos que el contenido principal tenga posicionamiento adecuado */
 .main__content {
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 1400px; /* Aumentado para aprovechar más espacio */
+  padding: 0 var(--container-padding);
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-xl);
-  max-width: var(--container-max-width);
-  margin: 0 auto;
-  padding: 0 var(--container-padding);
+  background-color: none;
+}
+
+/* Aseguramos que las áreas de contenido izquierda y derecha tengan posicionamiento adecuado */
+.main__content__left,
+.main__content__Right {
+  position: relative;
+  flex: 1;
+  min-width: 300px;
 }
 
 .main__content__left {
-  flex: 1;
-  min-width: 300px;
   color: var(--color-light);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-}
+  padding-left: 30px;
+  margin-top: -30px;
 
-.main__content__left h1 {
-  color: var(--color-secondary);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-  font-size: var(--font-size-3xl);
-  margin: var(--spacing-md) 0;
 }
 
 .main__content__left p {
   line-height: 1.8;
-  font-size: var(--font-size-md);
+  font-size: 1.2rem;
+  position: relative;
+  width: 100%;
+  margin: -60px 0px 0 20px;
+  text-align: justify;
+  padding-top: -40px;
+  padding-right: 40px;
 }
 
 .main__content__Right {
-  flex: 1;
-  min-width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,22 +87,27 @@
   border-radius: var(--border-radius-md);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
   border: 3px solid var(--color-secondary);
+  position: relative;
 }
 
-/* Mejorar el aspecto de los diálogos */
+/* Aseguramos que el contenedor de conversación tenga posicionamiento adecuado */
 #conversation-container {
-  max-width: var(--container-max-width);
+  position: relative;
+  width: 100%;
+  max-width: 1400px; /* Aumentado para aprovechar más espacio */
   margin: 0 auto;
   padding: var(--spacing-xl) var(--container-padding);
+  background: none;
 }
 
+/* Aseguramos que el diálogo tenga posicionamiento adecuado */
 .dialog {
+  position: relative;
+  width: 100%;
   display: flex;
   gap: var(--spacing-md);
-  background-color: rgba(30, 35, 40, 0.8);
-  border: 1px solid var(--color-gray);
+  background-image: url("../assets/papiro.png");
   border-radius: var(--border-radius-md);
-  padding: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
   box-shadow: var(--shadow-lg);
   animation: slideInUp var(--transition-normal);
@@ -102,6 +123,7 @@
   border: 3px solid var(--color-secondary);
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
   flex-shrink: 0;
+  position: relative;
 }
 
 .speaker {
@@ -110,10 +132,13 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   margin-bottom: var(--spacing-sm);
   font-size: var(--font-size-lg);
+  position: relative;
 }
 
-/* Mejorar los botones de navegación */
+/* Aseguramos que la navegación tenga posicionamiento adecuado */
 #navigation {
+  position: relative;
+  width: 100%;
   display: flex;
   justify-content: center;
   gap: var(--spacing-md);
@@ -130,6 +155,7 @@
   font-weight: bold;
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 #navigation button:hover:not(:disabled) {
@@ -150,6 +176,7 @@
   color: var(--color-dark);
   border: 1px solid var(--color-secondary-dark);
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+  position: relative;
 }
 
 #skipAll:hover {
@@ -170,6 +197,7 @@
   transition: all 0.3s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   font-weight: bold;
+  position: relative;
 }
 
 #continueToMain:hover {
@@ -178,27 +206,44 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* Mejorar el modal de introducción */
+/* Aseguramos que el modal tenga posicionamiento adecuado */
 #introModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
   background-color: rgba(0, 0, 0, 0.9);
 }
 
+/* Aseguramos que el contenido del modal tenga posicionamiento adecuado */
 #modalContent {
+  position: relative;
+  width: 80%;
+  max-width: 800px; /* Aumentado para aprovechar más espacio */
   background-color: rgba(30, 35, 40, 0.95);
   border: 3px solid var(--color-secondary);
   box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
   color: var(--color-light);
+  margin: 10% auto;
+  padding: var(--spacing-xl);
+  border-radius: var(--border-radius-md);
 }
 
 #modalContent h2 {
   color: var(--color-secondary);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   margin-bottom: var(--spacing-md);
+  position: relative;
+  width: 100%;
 }
 
 #modalContent p {
   margin-bottom: var(--spacing-lg);
   line-height: 1.8;
+  position: relative;
+  width: 100%;
 }
 
 #closeModal {
@@ -214,6 +259,7 @@
   cursor: pointer;
   display: block;
   margin: 0 auto;
+  position: relative;
 }
 
 #closeModal:hover {

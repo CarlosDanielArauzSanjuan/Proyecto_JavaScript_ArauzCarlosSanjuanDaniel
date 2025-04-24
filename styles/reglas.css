@@ -6,6 +6,8 @@ main {
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: var(--spacing-xl) var(--container-padding);
+  position: relative;
+  width: 100%;
 }
 
 .intro-text {
@@ -19,6 +21,7 @@ main {
   margin-right: auto;
   line-height: 1.8;
   position: relative;
+  width: 100%;
 }
 
 .intro-text::after {
@@ -32,14 +35,16 @@ main {
   background: linear-gradient(to right, transparent, var(--color-secondary), transparent);
 }
 
+/* Aseguramos que la sección de reglas tenga posicionamiento adecuado */
 .rules-section {
+  position: relative;
+  width: 100%;
   background-color: rgba(30, 35, 40, 0.8);
   border: 1px solid var(--color-gray);
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-lg);
   padding: var(--spacing-xl);
   margin-bottom: var(--spacing-xl);
-  position: relative;
 }
 
 .rules-section::before {
@@ -70,17 +75,24 @@ main {
   margin-bottom: var(--spacing-lg);
   text-align: center;
   font-size: var(--font-size-2xl);
+  position: relative;
+  width: 100%;
 }
 
-/* Diseño grid para los pasos de creación y reglas básicas */
+/* Aseguramos que el layout de cuadrícula tenga posicionamiento adecuado */
 .grid-layout {
+  position: relative;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-lg);
 }
 
 /* Estilos para los pasos de creación */
+/* Aseguramos que la tarjeta de paso tenga posicionamiento adecuado */
 .step-card {
+  position: relative;
+  width: 100%;
   background-color: rgba(30, 35, 40, 0.8);
   border: 1px solid var(--color-gray);
   border-left: 4px solid var(--color-primary);
@@ -88,7 +100,6 @@ main {
   padding: var(--spacing-lg);
   transition: all 0.3s ease;
   box-shadow: var(--shadow-md);
-  position: relative;
   overflow: hidden;
 }
 
@@ -138,6 +149,7 @@ main {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   margin-bottom: var(--spacing-sm);
+  position: relative;
 }
 
 .step-card:hover .step-number {
@@ -151,6 +163,8 @@ main {
   flex: 1;
   z-index: 1;
   color: var(--color-light);
+  position: relative;
+  width: 100%;
 }
 
 .step-card h3 {
@@ -158,6 +172,7 @@ main {
   margin-bottom: var(--spacing-xs);
   transition: color var(--transition-normal);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
 
 .step-card:hover h3 {
@@ -169,6 +184,8 @@ main {
   flex-wrap: wrap;
   gap: var(--spacing-xs);
   margin-top: var(--spacing-xs);
+  position: relative;
+  width: 100%;
 }
 
 .example {
@@ -180,6 +197,7 @@ main {
   transition: background-color var(--transition-normal), transform var(--transition-fast);
   border: 1px solid var(--color-gray);
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .step-card:hover .example {
@@ -190,7 +208,10 @@ main {
 }
 
 /* Estilos para las reglas básicas */
+/* Aseguramos que la tarjeta de regla tenga posicionamiento adecuado */
 .rule-card {
+  position: relative;
+  width: 100%;
   background-color: rgba(30, 35, 40, 0.8);
   border: 1px solid var(--color-gray);
   border-top: 4px solid var(--color-primary);
@@ -198,7 +219,6 @@ main {
   padding: var(--spacing-lg);
   transition: all 0.3s ease;
   box-shadow: var(--shadow-md);
-  position: relative;
   overflow: hidden;
   color: var(--color-light);
 }
@@ -250,7 +270,10 @@ main {
 }
 
 /* Sección de llamada a la acción */
+/* Aseguramos que la sección CTA tenga posicionamiento adecuado */
 .cta-section {
+  position: relative;
+  width: 100%;
   text-align: center;
   margin: var(--spacing-xl) 0;
 }
@@ -283,7 +306,7 @@ main {
 }
 
 .cta-button:hover {
-  background: linear-gradient(to bottom, var(--color-secondary-light), var(--color-secondary));
+  /* background: linear-gradient(to bottom, var(--color-secondary-light), var(--color-secondary)); */
   transform: translateY(-3px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
   text-decoration: none;
@@ -294,6 +317,7 @@ main {
 }
 
 /* Estilos responsivos */
+/* Ajustamos los layouts responsivos */
 @media (max-width: 992px) {
   .grid-layout {
     grid-template-columns: repeat(2, 1fr);

@@ -208,8 +208,8 @@ export const imagenHechizos = {
   shield: "./assets/img/item/armor/shield.png",
   sleep: "./assets/img/arcanos/sleep.webp",
 
-  // Imagen por defecto
-  default: "./assets/img/arcanos/default.png",
+  // Imagen por defecto para todos los dones arcanos sin imagen específica
+  default: "./assets/img/arcanos/default.webp",
 }
 
 // Mapeo de imágenes para género

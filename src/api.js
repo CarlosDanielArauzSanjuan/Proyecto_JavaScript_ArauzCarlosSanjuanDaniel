@@ -46,10 +46,8 @@ import { imagenRazas, imagenClases } from "./diccionarios.js"
 import {
   cargarTodasArmaduras,
   filtrarArmadurasPorClase,
-  mostrarDetallesArmadura,
   cargarOpcionesArmas,
   filtrarArmasPorClase,
-  mostrarDetallesArma,
 } from "./equipamiento.js"
 
 // =====================================================================
@@ -459,12 +457,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // Añadimos botón para limpiar caché (útil para depuración)
+  // Add improved clean cache button
   const header = document.querySelector("header")
   if (header) {
     const limpiarCacheBtn = document.createElement("button")
-    limpiarCacheBtn.textContent = "🧹 Limpiar Caché"
+    limpiarCacheBtn.innerHTML = "🧹 <span>Limpiar Caché</span>"
     limpiarCacheBtn.className = "btn-limpiar-cache"
+    limpiarCacheBtn.title = "Limpiar la caché para recargar todos los datos"
     limpiarCacheBtn.addEventListener("click", () => {
       if (confirm("¿Estás seguro de que deseas limpiar toda la caché? Esto ralentizará la próxima carga.")) {
         cache.limpiarCache()
@@ -666,6 +665,12 @@ async function cargarOpcionesAccesorios(selectId) {
 // correspondiente y filtrando opciones según sea necesario.
 // =====================================================================
 
+// Variable para almacenar la información de raza y clase seleccionadas
+const seleccionActual = {
+  raza: null,
+  clase: null,
+}
+
 // Evento: al seleccionar una raza, se muestra su información
 const razasSelect = document.getElementById("races")
 if (razasSelect) {
@@ -674,7 +679,12 @@ if (razasSelect) {
     // Obtiene la imagen correspondiente a la raza o usa la predeterminada
     const imagenSrc = imagenRazas[razaIndex] || imagenRazas["default"]
 
-    if (!razaIndex) return // Si no hay selección, no hace nada
+    if (!razaIndex) {
+      // Si no hay selección, limpiamos la información de raza
+      seleccionActual.raza = null
+      actualizarPanelInformacion()
+      return
+    }
 
     try {
       // Mostramos indicador de carga
@@ -691,22 +701,16 @@ if (razasSelect) {
         throw new Error("No se pudieron obtener datos de la raza")
       }
 
-      // HTML con la información de la raza seleccionada
-      const infoRazaHTML = `
-              <img src="${imagenSrc}" alt="${datos.name}" class="race-image" />
-              <h2>${datos.name}</h2>
-              <p><strong>Velocidad:</strong> ${datos.speed} pies por turno</p>
-              <p><strong>Alineamiento:</strong> ${datos.alignment}</p>
-              <p><strong>Longevidad:</strong> ${datos.age}</p>
-              <p><strong>Tamaño:</strong> ${datos.size}</p>
-              <p><strong>Descripción física:</strong> ${datos.size_description}</p>
-              <p><strong>Idiomas:</strong> ${datos.language_desc}</p>
-          `
-
-      // Muestra la información en el panel lateral
-      if (infoContainer) {
-        infoContainer.innerHTML = infoRazaHTML
+      // Guardamos la información de la raza seleccionada
+      seleccionActual.raza = {
+        index: razaIndex,
+        name: datos.name,
+        image: imagenSrc,
+        details: datos,
       }
+
+      // Actualizamos el panel de información
+      actualizarPanelInformacion()
     } catch (error) {
       console.error("❌ Error al obtener detalles de la raza: ", error)
       // Mostramos mensaje de error
@@ -719,7 +723,7 @@ if (razasSelect) {
   })
 }
 
-// Evento: al seleccionar una clase, se muestra su información y se filtran armas y armaduras
+// Evento: al seleccionar una clase, se muestra su información
 const clasesSelect = document.getElementById("classes")
 if (clasesSelect) {
   clasesSelect.addEventListener("change", async (event) => {
@@ -727,7 +731,12 @@ if (clasesSelect) {
     // Obtiene la imagen correspondiente a la clase o usa la predeterminada
     const imagenSrc = imagenClases[claseIndex] || imagenClases["default"]
 
-    if (!claseIndex) return // Si no hay selección, no hace nada
+    if (!claseIndex) {
+      // Si no hay selección, limpiamos la información de clase
+      seleccionActual.clase = null
+      actualizarPanelInformacion()
+      return
+    }
 
     try {
       // Mostramos indicador de carga
@@ -744,21 +753,18 @@ if (clasesSelect) {
         throw new Error("No se pudieron obtener datos de la clase")
       }
 
-      // HTML con la información de la clase seleccionada
-      const infoClaseHTML = `
-              <img src="${imagenSrc}" alt="${datos.name}" class="race-image" />
-              <h2>${datos.name}</h2>
-              <p><strong>Dado de Golpe:</strong> d${datos.hit_die}</p>
-              <p><strong>Competencias:</strong> ${datos.proficiencies ? datos.proficiencies.map((p) => p.name).join(", ") : "Ninguna"}</p>
-              <p><strong>Tiradas de Salvación:</strong> ${datos.saving_throws ? datos.saving_throws.map((s) => s.name).join(", ") : "Ninguna"}</p>
-          `
-
-      // Muestra la información en el panel lateral
-      if (infoContainer) {
-        infoContainer.innerHTML = infoClaseHTML
+      // Guardamos la información de la clase seleccionada
+      seleccionActual.clase = {
+        index: claseIndex,
+        name: datos.name,
+        image: imagenSrc,
+        details: datos,
       }
 
-      // Se filtran las armaduras y armas según la clase elegida
+      // Actualizamos el panel de información
+      actualizarPanelInformacion()
+
+      // Se filtran las armaduras y armas según la clase elegida (mantenemos esta funcionalidad)
       filtrarArmadurasPorClase(claseIndex, cache)
       filtrarArmasPorClase(claseIndex, cache)
     } catch (error) {
@@ -773,23 +779,107 @@ if (clasesSelect) {
   })
 }
 
-// Evento: al seleccionar una armadura, se muestra su detalle
+// Función para actualizar el panel de información con la raza y clase seleccionadas
+function actualizarPanelInformacion() {
+  const infoContainer = document.getElementById("infoCharacter")
+  if (!infoContainer) return
+
+  // Si no hay raza ni clase seleccionada, mostramos un mensaje por defecto
+  if (!seleccionActual.raza && !seleccionActual.clase) {
+    infoContainer.innerHTML = `
+      <div class="info-placeholder">
+        Selecciona una raza o clase para ver su información
+      </div>
+    `
+    return
+  }
+
+  // Construimos el HTML con la información disponible
+  let infoHTML = ""
+
+  // Si hay una raza seleccionada, mostramos su información
+  if (seleccionActual.raza) {
+    const raza = seleccionActual.raza
+    infoHTML += `
+      <div class="info-section">
+        <img src="${raza.image}" alt="${raza.name}" class="race-image" />
+        <h2>${raza.name}</h2>
+        <p><strong>Velocidad:</strong> ${raza.details.speed} pies por turno</p>
+        <p><strong>Alineamiento:</strong> ${raza.details.alignment}</p>
+        <p><strong>Longevidad:</strong> ${raza.details.age}</p>
+        <p><strong>Tamaño:</strong> ${raza.details.size}</p>
+        <p><strong>Descripción física:</strong> ${raza.details.size_description}</p>
+        <p><strong>Idiomas:</strong> ${raza.details.language_desc}</p>
+      </div>
+    `
+  }
+
+  // Si hay una clase seleccionada, mostramos su información
+  if (seleccionActual.clase) {
+    const clase = seleccionActual.clase
+    infoHTML += `
+      <div class="info-section">
+        <img src="${clase.image}" alt="${clase.name}" class="class-image" />
+        <h2>${clase.name}</h2>
+        <p><strong>Dado de Golpe:</strong> d${clase.details.hit_die}</p>
+        <p><strong>Competencias:</strong> ${clase.details.proficiencies ? clase.details.proficiencies.map((p) => p.name).join(", ") : "Ninguna"}</p>
+        <p><strong>Tiradas de Salvación:</strong> ${clase.details.saving_throws ? clase.details.saving_throws.map((s) => s.name).join(", ") : "Ninguna"}</p>
+      </div>
+    `
+  }
+
+  // Actualizamos el contenido del panel
+  infoContainer.innerHTML = infoHTML
+}
+
+// Evento: al seleccionar una armadura, solo actualizamos el cofre
 const armorSelect = document.getElementById("armor")
 if (armorSelect) {
   armorSelect.addEventListener("change", async (event) => {
-    const armaduraIndex = event.target.value
-    mostrarDetallesArmadura(armaduraIndex, cache) // Pasamos el sistema de caché
+    // Ya no mostramos detalles en el panel izquierdo
+    // Solo actualizamos el cofre
+    if (typeof actualizarCofre === "function") {
+      actualizarCofre()
+    }
   })
 }
 
-// Evento: al seleccionar un arma, se muestra su detalle
+// Evento: al seleccionar un arma, solo actualizamos el cofre
 const weaponSelect = document.getElementById("weapon")
 if (weaponSelect) {
   weaponSelect.addEventListener("change", async (event) => {
-    const armaIndex = event.target.value
-    mostrarDetallesArma(armaIndex, cache) // Pasamos el sistema de caché
+    // Ya no mostramos detalles en el panel izquierdo
+    // Solo actualizamos el cofre
+    if (typeof actualizarCofre === "function") {
+      actualizarCofre()
+    }
   })
 }
+
+// Evento: al seleccionar un don arcano, solo actualizamos el cofre
+const abilitySelect = document.getElementById("ability")
+if (abilitySelect) {
+  abilitySelect.addEventListener("change", () => {
+    // Solo actualizamos el cofre
+    if (typeof actualizarCofre === "function") {
+      actualizarCofre()
+    }
+  })
+}
+
+// Evento: al seleccionar accesorios, solo actualizamos el cofre
+const accessoriesSelect = document.getElementById("accessories")
+if (accessoriesSelect) {
+  accessoriesSelect.addEventListener("change", () => {
+    // Solo actualizamos el cofre
+    if (typeof actualizarCofre === "function") {
+      actualizarCofre()
+    }
+  })
+}
+
+// Declare actualizarCofre before using it
+let actualizarCofre
 
 // Exportamos el sistema de caché para que pueda ser usado por otros módulos
 export { cache }

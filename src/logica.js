@@ -194,11 +194,13 @@ function inicializarPaginaDetallesPersonaje() {
     return
   }
 
-  // Verificamos que exista un ID en la URL
+  // Verificamos que exista un ID o nombre+fecha en la URL
   const urlParams = new URLSearchParams(window.location.search)
   const personajeId = urlParams.get("id")
+  const personajeName = urlParams.get("name")
+  const personajeCreated = urlParams.get("created")
 
-  if (!personajeId) {
+  if (!personajeId && (!personajeName || !personajeCreated)) {
     contenedor.innerHTML = `
       <div class="error-message">
         <p>No se ha especificado ningún aventurero para consultar.</p>

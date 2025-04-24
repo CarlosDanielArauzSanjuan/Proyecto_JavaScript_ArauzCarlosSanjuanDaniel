@@ -1,3 +1,6 @@
+/* Importamos los estilos base */
+@import "base.css";
+
 /* Mejorar el aspecto de la página de detalles */
 .character-details {
   background-color: rgba(30, 35, 40, 0.8);
@@ -6,6 +9,8 @@
   box-shadow: var(--shadow-lg);
   color: var(--color-light);
   margin: var(--spacing-xl) 0;
+  position: relative;
+  width: 100%;
 }
 
 /* Añadimos estilos para los mensajes de carga y error */
@@ -19,6 +24,8 @@
   margin: var(--spacing-xl) 0;
   animation: pulse 1.5s infinite;
   box-shadow: var(--shadow-md);
+  position: relative;
+  width: 100%;
 }
 
 @keyframes pulse {
@@ -41,11 +48,14 @@
   margin: var(--spacing-xl) 0;
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-md);
+  position: relative;
+  width: 100%;
 }
 
 .error-message p {
   margin-bottom: var(--spacing-md);
   color: var(--color-light);
+  position: relative;
 }
 
 .back-btn {
@@ -59,6 +69,7 @@
   transition: all 0.3s ease;
   display: inline-block;
   margin-top: var(--spacing-md);
+  position: relative;
 }
 
 .back-btn:hover {
@@ -79,12 +90,14 @@
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: var(--border-radius-sm);
   overflow: hidden;
+  position: relative;
 }
 
 .cofre-item-imagen img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  position: relative;
 }
 
 .cofre-item {
@@ -96,6 +109,8 @@
   padding: var(--spacing-sm);
   transition: transform var(--transition-fast);
   text-align: center;
+  position: relative;
+  width: 100%;
 }
 
 .cofre-item:hover {
@@ -107,11 +122,13 @@
   margin-top: var(--spacing-xs);
   font-weight: bold;
   text-transform: capitalize;
+  position: relative;
 }
 
 .cofre-item-tipo {
   font-size: var(--font-size-xs);
   color: var(--color-gray-dark);
+  position: relative;
 }
 
 .cofre-vacio {
@@ -119,6 +136,8 @@
   padding: var(--spacing-lg);
   color: var(--color-gray-dark);
   font-style: italic;
+  position: relative;
+  width: 100%;
 }
 
 /* Añadir estilos para la imagen de género y mejorar el diseño del encabezado */
@@ -126,19 +145,60 @@
   background: linear-gradient(to bottom, rgba(70, 55, 20, 0.6), rgba(30, 35, 40, 0.8));
   border-bottom: 2px solid var(--color-gray);
   padding: var(--spacing-xl);
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
 }
 
-.gender-image {
-  width: 120px;
-  height: 120px;
+/* Estilos para el contenedor de imágenes */
+.character-images {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.character-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.gender-image,
+.race-image,
+.class-image {
+  width: 100px;
+  height: 100px;
   border: 3px solid var(--color-secondary);
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
   background-color: rgba(20, 20, 20, 0.5);
   padding: 5px;
+  position: relative;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.character-avatar:hover .gender-image,
+.character-avatar:hover .race-image,
+.character-avatar:hover .class-image {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+}
+
+.image-label {
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-secondary);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
 }
 
 .character-title {
   flex: 1;
+  position: relative;
 }
 
 .character-title h1 {
@@ -146,11 +206,14 @@
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   font-size: var(--font-size-3xl);
   margin-bottom: var(--spacing-sm);
+  position: relative;
+  width: 100%;
 }
 
 .character-subtitle {
   color: var(--color-light);
   font-style: italic;
+  position: relative;
 }
 
 .attributes-grid {
@@ -158,6 +221,8 @@
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: var(--spacing-lg);
   margin-bottom: var(--spacing-lg);
+  position: relative;
+  width: 100%;
 }
 
 .attribute {
@@ -168,6 +233,8 @@
   text-align: center;
   box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
+  position: relative;
+  width: 100%;
 }
 
 .attribute:hover {
@@ -181,6 +248,7 @@
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   font-weight: bold;
   margin-bottom: var(--spacing-xs);
+  position: relative;
 }
 
 .attribute-value {
@@ -188,20 +256,25 @@
   font-size: var(--font-size-2xl);
   font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  position: relative;
 }
 
 .attribute-mod {
   color: var(--color-secondary-light);
   font-size: var(--font-size-md);
   font-weight: bold;
+  position: relative;
 }
 
 .equipment-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: var(--spacing-lg);
+  position: relative;
+  width: 100%;
 }
 
+/* Estilos mejorados para los items de equipamiento */
 .equipment-item {
   background-color: rgba(30, 35, 40, 0.8);
   border: 1px solid var(--color-gray);
@@ -209,12 +282,52 @@
   padding: var(--spacing-md);
   box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .equipment-item:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
   border-color: var(--color-secondary);
+}
+
+.equipment-image {
+  width: 100px;
+  height: 100px;
+  margin-bottom: var(--spacing-sm);
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.equipment-item:hover .equipment-image {
+  border-color: var(--color-secondary-light);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+.item-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.equipment-item:hover .item-image {
+  transform: scale(1.1);
+}
+
+.equipment-info {
+  text-align: center;
+  width: 100%;
 }
 
 .equipment-label {
@@ -222,17 +335,21 @@
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   font-weight: bold;
   margin-bottom: var(--spacing-xs);
+  position: relative;
 }
 
 .equipment-value {
   color: var(--color-light);
   text-transform: capitalize;
+  position: relative;
 }
 
 .character-section {
   padding: var(--spacing-xl);
   margin-bottom: var(--spacing-lg);
   background-color: rgba(20, 20, 20, 0.3);
+  position: relative;
+  width: 100%;
 }
 
 .character-section h2 {
@@ -241,6 +358,8 @@
   border-bottom: 2px solid var(--color-secondary);
   padding-bottom: var(--spacing-sm);
   margin-bottom: var(--spacing-lg);
+  position: relative;
+  width: 100%;
 }
 
 /* Estilos responsivos */
@@ -248,6 +367,10 @@
   .character-header {
     flex-direction: column;
     text-align: center;
+  }
+
+  .character-images {
+    margin-bottom: var(--spacing-md);
   }
 
   .character-subtitle {
@@ -259,7 +382,25 @@
   }
 
   .equipment-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .equipment-grid {
     grid-template-columns: 1fr;
+  }
+
+  .gender-image,
+  .race-image,
+  .class-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .equipment-image {
+    width: 80px;
+    height: 80px;
   }
 }
 
@@ -268,12 +409,15 @@
   border-top: 2px solid var(--color-gray);
   padding: var(--spacing-xl);
   text-align: center;
+  position: relative;
+  width: 100%;
 }
 
 .character-creation-date {
   color: var(--color-light);
   font-style: italic;
   margin-bottom: var(--spacing-md);
+  position: relative;
 }
 
 /* Variantes por clase con colores más intensos */

@@ -36,7 +36,7 @@ export const proficienciasArmasClase = {
   fighter: ["simple", "martial"], // Guerrero: simples y marciales
   monk: ["simple", "shortswords"], // Monje: simples y espadas cortas
   paladin: ["simple", "martial"], // Paladín: simples y marciales
-  ranger: ["simple", "martial"], // Explorador: simples y marciales
+  ranger: ["simple", "martial"], // Explorador: ligera, media, escudo
   rogue: ["simple", "hand crossbows", "longswords", "rapiers", "shortswords"], // Pícaro: simples y algunas marciales
   sorcerer: ["simple"], // Hechicero: simples
   warlock: ["simple"], // Brujo: simples
@@ -74,16 +74,16 @@ export const atributosRecomendadosClase = {
 
 // Mapeo de imágenes para razas
 export const imagenRazas = {
-  dragonborn: "./assets/img/personajes/Dragonborn.jpg",
+  dragonborn: "./assets/img/personajes/dragonborn.jpg",
   dwarf: "./assets/img/personajes/dwarf.webp",
   elf: "./assets/img/personajes/elf.jpg",
   gnome: "./assets/img/personajes/gnome.jpg",
   "half-elf": "./assets/img/personajes/half-elf.jpg",
   "half-orc": "./assets/img/personajes/half-orc.jpg",
-  halfling: "./assets/img/personajes/Halfling.png",
+  halfling: "./assets/img/personajes/halfling.png",
   human: "./assets/img/personajes/human.jpg",
   tiefling: "./assets/img/personajes/tiefling.png",
-  default: "./assets/img/personajes/durnan.webp",
+  default: "./assets/img/personajes/default.webp",
 }
 
 // Mapeo de imágenes para clases
@@ -212,8 +212,6 @@ export const imagenHechizos = {
   default: "./assets/img/arcanos/default.png",
 }
 
-// Añadir al final del archivo, después de los mapeos existentes
-
 // Mapeo de imágenes para género
 export const imagenGenero = {
   masculino: "./assets/img/gender/male.png",
@@ -227,6 +225,6 @@ export const imagenEquipamientoDefault = "./assets/img/item/default.jpg"
 
 // Mapeo de imágenes para accesorios/equipo de aventura
 export const imagenAccesorios = {
-
-  default: "./assets/img/item/default.jpg"
+  // Imagen por defecto
+  default: "./assets/img/item/default.jpg",
 }

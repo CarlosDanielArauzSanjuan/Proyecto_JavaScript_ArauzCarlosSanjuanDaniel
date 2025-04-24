@@ -6,6 +6,9 @@
 // específico en sus respectivas páginas.
 // =====================================================================
 
+// Importar el mapeo de género al principio del archivo
+import { imagenGenero } from "./diccionarios.js"
+
 // Función para cargar la lista de personajes desde localStorage
 export function cargarListaPersonajes(contenedor) {
   try {
@@ -102,7 +105,7 @@ export function cargarListaPersonajes(contenedor) {
   }
 }
 
-// Función para cargar los detalles de un personaje específico
+// Modificar la función cargarDetallesPersonaje para incluir la imagen de género
 export function cargarDetallesPersonaje(contenedor) {
   try {
     // Obtenemos el ID del personaje de la URL
@@ -112,11 +115,23 @@ export function cargarDetallesPersonaje(contenedor) {
     // Si no hay ID, mostramos un error
     if (personajeId === null) {
       contenedor.innerHTML = `
-          <div class="error-message">
-            <p>No se ha especificado ningún aventurero para consultar.</p>
-            <a href="listas.html" class="back-btn">Volver al Salón de la Fama</a>
-          </div>
-        `
+      <div class="error-message">
+        <p>No se ha especificado ningún aventurero para consultar.</p>
+        <a href="listas.html" class="back-btn">Volver al Salón de la Fama</a>
+      </div>
+    `
+      return
+    }
+
+    // Ensure personajeId is a number
+    const personajeIndex = Number.parseInt(personajeId, 10)
+    if (isNaN(personajeIndex)) {
+      contenedor.innerHTML = `
+      <div class="error-message">
+        <p>El identificador del aventurero no es válido.</p>
+        <a href="listas.html" class="back-btn">Volver al Salón de la Fama</a>
+      </div>
+    `
       return
     }
 
@@ -124,7 +139,7 @@ export function cargarDetallesPersonaje(contenedor) {
     const personajesGuardados = JSON.parse(localStorage.getItem("dnd_personajes")) || []
 
     // Obtenemos el personaje específico
-    const personaje = personajesGuardados[personajeId]
+    const personaje = personajesGuardados[personajeIndex]
 
     // Si no existe el personaje, mostramos un error
     if (!personaje) {
@@ -153,14 +168,24 @@ export function cargarDetallesPersonaje(contenedor) {
       }
     }
 
+    // Obtenemos la imagen de género
+    const imagenGeneroSrc = personaje.gender
+      ? imagenGenero[personaje.gender] || imagenGenero.default
+      : imagenGenero.default
+
     // Creamos el HTML con los detalles completos del personaje
     const detallesHTML = `
         <div class="character-details ${tipoClase}">
           <div class="character-header">
-            <h1>${personaje.name || "Aventurero sin nombre"}</h1>
-            <div class="character-subtitle">
-              <span class="character-race-class">${personaje.races || "?"} ${personaje.classes || "?"}</span>
-              <span class="character-gender">${personaje.gender || "?"}</span>
+            <div class="character-avatar">
+              <img src="${imagenGeneroSrc}" alt="Avatar de ${personaje.name}" class="gender-image">
+            </div>
+            <div class="character-title">
+              <h1>${personaje.name || "Aventurero sin nombre"}</h1>
+              <div class="character-subtitle">
+                <span class="character-race-class">${personaje.races || "?"} ${personaje.classes || "?"}</span>
+                <span class="character-gender">${personaje.gender || "?"}</span>
+              </div>
             </div>
           </div>
           
@@ -217,7 +242,7 @@ export function cargarDetallesPersonaje(contenedor) {
               </div>
               <div class="equipment-item">
                 <div class="equipment-label">Accesorios:</div>
-                <div class="equipment-value">${personaje.accesories || "Ninguno"}</div>
+                <div class="equipment-value">${personaje.accessories || "Ninguno"}</div>
               </div>
             </div>
           </div>

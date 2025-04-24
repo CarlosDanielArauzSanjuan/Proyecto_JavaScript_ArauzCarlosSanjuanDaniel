@@ -8,9 +8,6 @@
   <script src="./src/api.js" defer type="module"></script>
   <script src="./src/logica.js" defer type="module"></script>
   <script src="./src/atributos.js" defer type="module"></script>
-  <!-- Eliminar o comentar la línea del cofre vacío -->
-  <!-- <script src="./src/cofre.js" defer type="module"></script> -->
-  <!-- Añadir el script del cofre nuevamente, ahora que tiene contenido -->
   <script src="./src/cofre.js" defer type="module"></script>
 </head>
 <body>
@@ -49,7 +46,37 @@
           <option value="">Selecciona tu clase</option>
         </select>
 
-        <!-- Sistema de atributos -->
+        <label for="armor">Protección:</label>
+        <select id="armor" name="armor" required>
+          <option value="">Selecciona tu armadura</option>
+        </select>
+
+        <label for="weapon">Arma:</label>
+        <select id="weapon" name="weapon" required>
+          <option value="">Selecciona tu arma</option>
+        </select>
+
+        <label for="ability">Don Arcano:</label>
+        <select id="ability" name="ability" required>
+          <option value="">Selecciona tu don arcano</option>
+        </select>
+
+        <label for="accessories">Equipo de Aventura:</label>
+        <select id="accessories" name="accessories" required>
+          <option value="">Selecciona tu equipo</option>
+        </select>
+
+        <!-- Campos ocultos para mantener compatibilidad -->
+        <div class="statistics">
+          <input type="hidden" id="force_hidden" name="force" placeholder="Fuerza" max="20" required />
+          <input type="hidden" id="dexterity_hidden" name="dexterity" placeholder="Destreza" max="20" required />
+          <input type="hidden" id="intelligence_hidden" name="intelligence" placeholder="Inteligencia" max="20" required />
+          <input type="hidden" id="constitution_hidden" name="constitution" placeholder="Constitución" max="20" required />
+          <input type="hidden" id="wisdom_hidden" name="wisdom" placeholder="Sabiduría" max="20" required />
+          <input type="hidden" id="charisma_hidden" name="charisma" placeholder="Carisma" max="20" required />
+        </div>
+
+        <!-- Sistema de atributos (movido después del equipo) -->
         <div class="atributos-container">
           <div class="atributos-header">
             <h3>Atributos</h3>
@@ -140,37 +167,6 @@
             </div>
           </div>
         </div>
-
-        <!-- Campos ocultos para mantener compatibilidad -->
-        <div class="statistics">
-          <!-- Hidden inputs for compatibility, using different IDs -->
-          <input type="hidden" id="force_hidden" name="force" placeholder="Fuerza" max="20" required />
-          <input type="hidden" id="dexterity_hidden" name="dexterity" placeholder="Destreza" max="20" required />
-          <input type="hidden" id="intelligence_hidden" name="intelligence" placeholder="Inteligencia" max="20" required />
-          <input type="hidden" id="constitution_hidden" name="constitution" placeholder="Constitución" max="20" required />
-          <input type="hidden" id="wisdom_hidden" name="wisdom" placeholder="Sabiduría" max="20" required />
-          <input type="hidden" id="charisma_hidden" name="charisma" placeholder="Carisma" max="20" required />
-        </div>
-
-        <label for="armor">Protección:</label>
-        <select id="armor" name="armor" required>
-          <option value="">Selecciona tu armadura</option>
-        </select>
-
-        <label for="weapon">Arma:</label>
-        <select id="weapon" name="weapon" required>
-          <option value="">Selecciona tu arma</option>
-        </select>
-
-        <label for="ability">Don Arcano:</label>
-        <select id="ability" name="ability" required>
-          <option value="">Selecciona tu don arcano</option>
-        </select>
-
-        <label for="accessories">Equipo de Aventura:</label>
-        <select id="accessories" name="accessories" required>
-          <option value="">Selecciona tu equipo</option>
-        </select>
 
         <button type="submit">Inscribir en los Pergaminos del Destino</button>
       </form>

@@ -5,7 +5,7 @@
 #listCharacters {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
   max-width: var(--container-max-width);
   margin: 0 auto;
 }
@@ -22,88 +22,117 @@
 
 /* Estilos para la lista vacía */
 .empty-list {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: var(--spacing-xl);
-  background-color: var(--color-white);
+  background-color: rgba(30, 35, 40, 0.8);
+  border: 1px solid var(--color-gray);
   border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-md);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
 }
 
 .empty-list p {
+  color: var(--color-light);
   margin-bottom: var(--spacing-md);
-  color: var(--color-gray-dark);
 }
 
 .create-character-btn {
-  display: inline-block;
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background: linear-gradient(to bottom, var(--color-secondary), var(--color-secondary-dark));
+  color: var(--color-dark);
+  border: 1px solid var(--color-secondary-dark);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
   padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: var(--border-radius-md);
-  text-decoration: none;
   font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-block;
   margin-top: var(--spacing-md);
-  transition: background-color var(--transition-fast);
 }
 
 .create-character-btn:hover {
-  background-color: var(--color-primary-light);
+  background: linear-gradient(to bottom, var(--color-secondary-light), var(--color-secondary));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   text-decoration: none;
 }
 
 /* Estilos para las tarjetas de personajes */
+.character-card {
+  background-color: rgba(30, 35, 40, 0.8);
+  border: 1px solid var(--color-gray);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.character-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  border-color: var(--color-secondary);
+}
+
 .character-header {
+  background: linear-gradient(to bottom, rgba(70, 55, 20, 0.6), rgba(30, 35, 40, 0.8));
+  border-bottom: 2px solid var(--color-gray);
   padding: var(--spacing-lg);
-  background-color: var(--color-light);
-  border-bottom: var(--border-width) solid var(--color-gray-light);
 }
 
 .character-header h2 {
-  color: var(--color-primary);
+  color: var(--color-secondary);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   margin-bottom: var(--spacing-xs);
-  font-size: var(--font-size-lg);
 }
 
 .character-race-class {
-  color: var(--color-gray-dark);
+  color: var(--color-light);
   font-style: italic;
 }
 
 .character-body {
   padding: var(--spacing-lg);
+  background-color: rgba(20, 20, 20, 0.5);
 }
 
 .character-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
 }
 
 .stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--color-light);
-  padding: var(--spacing-xs);
+  background-color: rgba(30, 35, 40, 0.8);
+  border: 1px solid var(--color-gray-dark);
   border-radius: var(--border-radius-sm);
+  padding: var(--spacing-sm);
+  transition: all 0.3s ease;
+}
+
+.character-card:hover .stat {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
 }
 
 .stat-name {
+  color: var(--color-secondary);
   font-size: var(--font-size-xs);
   font-weight: bold;
-  color: var(--color-primary);
 }
 
 .stat-value {
+  color: var(--color-white);
   font-size: var(--font-size-md);
   font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .character-equipment {
+  color: var(--color-light);
   margin-top: var(--spacing-md);
   font-size: var(--font-size-sm);
+  background-color: rgba(30, 35, 40, 0.5);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--color-gray-dark);
 }
 
 .character-equipment p {
@@ -111,26 +140,44 @@
 }
 
 .character-footer {
+  background: linear-gradient(to top, rgba(70, 55, 20, 0.6), rgba(30, 35, 40, 0.8));
+  border-top: 2px solid var(--color-gray);
   padding: var(--spacing-md);
-  background-color: var(--color-light);
-  border-top: var(--border-width) solid var(--color-gray-light);
   text-align: center;
 }
 
 .view-details-btn {
-  display: inline-block;
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  padding: var(--spacing-xs) var(--spacing-md);
+  background: linear-gradient(to bottom, var(--color-secondary), var(--color-secondary-dark));
+  color: var(--color-dark);
+  border: 1px solid var(--color-secondary-dark);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+  padding: var(--spacing-xs) var(--spacing-lg);
   border-radius: var(--border-radius-sm);
-  text-decoration: none;
   font-weight: bold;
-  transition: background-color var(--transition-fast);
+  transition: all 0.3s ease;
 }
 
 .view-details-btn:hover {
-  background-color: var(--color-primary-light);
-  text-decoration: none;
+  background: linear-gradient(to bottom, var(--color-secondary-light), var(--color-secondary));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Variantes por clase con colores más intensos */
+.character-card.mago {
+  border-top: 5px solid var(--color-mage);
+}
+
+.character-card.guerrero {
+  border-top: 5px solid var(--color-warrior);
+}
+
+.character-card.picaro {
+  border-top: 5px solid var(--color-rogue);
+}
+
+.character-card.clerigo {
+  border-top: 5px solid var(--color-cleric);
 }
 
 /* Estilos responsivos */

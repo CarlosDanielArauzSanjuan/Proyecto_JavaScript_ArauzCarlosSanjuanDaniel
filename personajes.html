@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forja de Héroes - D&D</title>
+  <link rel="stylesheet" href="./styles/personajes.css" />
+  <script src="./src/api.js" defer type="module"></script>
+  <script src="./src/logica.js" defer></script>
+  <script src="./src/atributos.js" defer type="module"></script>
+  <script src="./src/cofre.js" defer type="module"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="assets/icons/dnd_logo_big.webp" alt="Logo D&D" />
+    </div>
+    <div class="referencies__intoPage">
+      <a href="listas.html">Salón de la Fama</a>
+      <a href="reglas.html">Códice de Reglas</a>
+      <a href="index.html">Volver al Portal</a>
+    </div>
+  </header>
+  <main>
+    <section>
+      <h1>Forja de Héroes</h1>
+      <form id="form__character">
+        <label for="name">Nombre del Aventurero:</label>
+        <input type="text" id="name" name="name" required placeholder="Ej. Drizzt Do'Urden" />
+
+        <label for="gender">Género:</label>
+        <select id="gender" name="gender" required>
+          <option value="">Selecciona tu género</option>
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+          <option value="otro">Otro</option>
+        </select>
+
+        <label for="races">Linaje:</label>
+        <select id="races" required>
+          <option value="">Selecciona tu raza</option>
+        </select>
+
+        <label for="classes">Vocación:</label>
+        <select id="classes" required>
+          <option value="">Selecciona tu clase</option>
+        </select>
+
+        <!-- Sistema de atributos -->
+        <div class="atributos-container">
+          <div class="atributos-header">
+            <h3>Atributos</h3>
+            <div class="puntos-container">
+              Puntos disponibles: <span id="puntos-disponibles">10</span>
+            </div>
+          </div>
+          <div id="atributos-mensaje" class="atributos-mensaje">
+            Selecciona primero tu Linaje y Vocación para distribuir tus puntos de atributos
+          </div>
+          <div class="atributos-grid">
+            <!-- Fuerza -->
+            <div class="atributo-item">
+              <div class="atributo-nombre">Fuerza</div>
+              <div class="atributo-controles">
+                <button type="button" id="btn-dec-force">-</button>
+                <input type="text" id="force" class="atributo-valor" readonly value="8" />
+                <button type="button" id="btn-inc-force">+</button>
+                <span id="force-bonus" class="atributo-bonus"></span>
+                <span id="force-total" class="atributo-total">8</span>
+                <span id="force-mod" class="atributo-mod">-1</span>
+              </div>
+            </div>
+            
+            <!-- Destreza -->
+            <div class="atributo-item">
+              <div class="atributo-nombre">Destreza</div>
+              <div class="atributo-controles">
+                <button type="button" id="btn-dec-dexterity">-</button>
+                <input type="text" id="dexterity" class="atributo-valor" readonly value="8" />
+                <button type="button" id="btn-inc-dexterity">+</button>
+                <span id="dexterity-bonus" class="atributo-bonus"></span>
+                <span id="dexterity-total" class="atributo-total">8</span>
+                <span id="dexterity-mod" class="atributo-mod">-1</span>
+              </div>
+            </div>
+            
+            <!-- Constitución -->
+            <div class="atributo-item">
+              <div class="atributo-nombre">Constitución</div>
+              <div class="atributo-controles">
+                <button type="button" id="btn-dec-constitution">-</button>
+                <input type="text" id="constitution" class="atributo-valor" readonly value="8" />
+                <button type="button" id="btn-inc-constitution">+</button>
+                <span id="constitution-bonus" class="atributo-bonus"></span>
+                <span id="constitution-total" class="atributo-total">8</span>
+                <span id="constitution-mod" class="atributo-mod">-1</span>
+              </div>
+            </div>
+            
+            <!-- Inteligencia -->
+            <div class="atributo-item">
+              <div class="atributo-nombre">Inteligencia</div>
+              <div class="atributo-controles">
+                <button type="button" id="btn-dec-intelligence">-</button>
+                <input type="text" id="intelligence" class="atributo-valor" readonly value="8" />
+                <button type="button" id="btn-inc-intelligence">+</button>
+                <span id="intelligence-bonus" class="atributo-bonus"></span>
+                <span id="intelligence-total" class="atributo-total">8</span>
+                <span id="intelligence-mod" class="atributo-mod">-1</span>
+              </div>
+            </div>
+            
+            <!-- Sabiduría -->
+            <div class="atributo-item">
+              <div class="atributo-nombre">Sabiduría</div>
+              <div class="atributo-controles">
+                <button type="button" id="btn-dec-wisdom">-</button>
+                <input type="text" id="wisdom" class="atributo-valor" readonly value="8" />
+                <button type="button" id="btn-inc-wisdom">+</button>
+                <span id="wisdom-bonus" class="atributo-bonus"></span>
+                <span id="wisdom-total" class="atributo-total">8</span>
+                <span id="wisdom-mod" class="atributo-mod">-1</span>
+              </div>
+            </div>
+            
+            <!-- Carisma -->
+            <div class="atributo-item">
+              <div class="atributo-nombre">Carisma</div>
+              <div class="atributo-controles">
+                <button type="button" id="btn-dec-charisma">-</button>
+                <input type="text" id="charisma" class="atributo-valor" readonly value="8" />
+                <button type="button" id="btn-inc-charisma">+</button>
+                <span id="charisma-bonus" class="atributo-bonus"></span>
+                <span id="charisma-total" class="atributo-total">8</span>
+                <span id="charisma-mod" class="atributo-mod">-1</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Campos ocultos para mantener compatibilidad -->
+        <div class="statistics">
+          <input type="hidden" id="force" placeholder="Fuerza" max="20" required />
+          <input type="hidden" id="dexterity" placeholder="Destreza" max="20" required />
+          <input type="hidden" id="intelligence" placeholder="Inteligencia" max="20" required />
+          <input type="hidden" id="constitution" placeholder="Constitución" max="20" required />
+          <input type="hidden" id="wisdom" placeholder="Sabiduría" max="20" required />
+          <input type="hidden" id="charisma" placeholder="Carisma" max="20" required />
+        </div>
+
+        <label for="armor">Protección:</label>
+        <select id="armor" required>
+          <option value="">Selecciona tu armadura</option>
+        </select>
+
+        <label for="weapon">Arma:</label>
+        <select id="weapon" required>
+          <option value="">Selecciona tu arma</option>
+        </select>
+
+        <label for="ability">Don Arcano:</label>
+        <select id="ability" required>
+          <option value="">Selecciona tu don arcano</option>
+        </select>
+
+        <label for="accessories">Equipo de Aventura:</label>
+        <select id="accessories" required>
+          <option value="">Selecciona tu equipo</option>
+        </select>
+
+        <button type="submit">Inscribir en los Pergaminos del Destino</button>
+      </form>
+    </section>
+    <section class="sectionRight__InfoCharacter">
+      <div id="infoCharacter" class="character__info">
+        <!-- Aquí se mostrará la información del personaje seleccionado -->
+      </div>
+      
+      <!-- Indicador de estado de carga -->
+      <div id="loading-status" class="loading-status">
+        <div class="loading-indicator">
+          <div class="loading-spinner"></div>
+          <p>Consultando el grimorio arcano...</p>
+        </div>
+      </div>
+      
+      <!-- El cofre de equipamiento se añadirá aquí mediante JavaScript -->
+    </section>
+  </main>
+  <footer>
+    <div class="div__footer">
+      <p>Custodiado por Daniel Arauz y la Orden de los Escribas Arcanos</p>
+      <p>2025</p>
+    </div>
+  </footer>
+</body>
+</html>

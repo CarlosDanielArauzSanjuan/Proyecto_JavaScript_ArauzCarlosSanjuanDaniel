@@ -40,12 +40,12 @@
         </select>
 
         <label for="races">Linaje:</label>
-        <select id="races" required>
+        <select id="races" name="races" required>
           <option value="">Selecciona tu raza</option>
         </select>
 
         <label for="classes">Vocación:</label>
-        <select id="classes" required>
+        <select id="classes" name="classes" required>
           <option value="">Selecciona tu clase</option>
         </select>
 
@@ -143,31 +143,32 @@
 
         <!-- Campos ocultos para mantener compatibilidad -->
         <div class="statistics">
-          <input type="hidden" id="force" placeholder="Fuerza" max="20" required />
-          <input type="hidden" id="dexterity" placeholder="Destreza" max="20" required />
-          <input type="hidden" id="intelligence" placeholder="Inteligencia" max="20" required />
-          <input type="hidden" id="constitution" placeholder="Constitución" max="20" required />
-          <input type="hidden" id="wisdom" placeholder="Sabiduría" max="20" required />
-          <input type="hidden" id="charisma" placeholder="Carisma" max="20" required />
+          <!-- Hidden inputs for compatibility, using different IDs -->
+          <input type="hidden" id="force_hidden" name="force" placeholder="Fuerza" max="20" required />
+          <input type="hidden" id="dexterity_hidden" name="dexterity" placeholder="Destreza" max="20" required />
+          <input type="hidden" id="intelligence_hidden" name="intelligence" placeholder="Inteligencia" max="20" required />
+          <input type="hidden" id="constitution_hidden" name="constitution" placeholder="Constitución" max="20" required />
+          <input type="hidden" id="wisdom_hidden" name="wisdom" placeholder="Sabiduría" max="20" required />
+          <input type="hidden" id="charisma_hidden" name="charisma" placeholder="Carisma" max="20" required />
         </div>
 
         <label for="armor">Protección:</label>
-        <select id="armor" required>
+        <select id="armor" name="armor" required>
           <option value="">Selecciona tu armadura</option>
         </select>
 
         <label for="weapon">Arma:</label>
-        <select id="weapon" required>
+        <select id="weapon" name="weapon" required>
           <option value="">Selecciona tu arma</option>
         </select>
 
         <label for="ability">Don Arcano:</label>
-        <select id="ability" required>
+        <select id="ability" name="ability" required>
           <option value="">Selecciona tu don arcano</option>
         </select>
 
         <label for="accessories">Equipo de Aventura:</label>
-        <select id="accessories" required>
+        <select id="accessories" name="accessories" required>
           <option value="">Selecciona tu equipo</option>
         </select>
 

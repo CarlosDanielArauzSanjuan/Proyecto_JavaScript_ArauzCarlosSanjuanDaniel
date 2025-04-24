@@ -1,3 +1,22 @@
+// Polyfills for older browsers
+// Optional chaining polyfill
+if (!Object.prototype.hasOwnProperty.call(window, "OptionalChaining")) {
+  window.OptionalChaining = (obj, ...props) => {
+    if (obj == null) return undefined
+    let result = obj
+    for (const prop of props) {
+      if (result == null) return undefined
+      result = result[prop]
+    }
+    return result
+  }
+}
+
+// Nullish coalescing polyfill
+function nullishCoalescing(left, right) {
+  return left != null ? left : right
+}
+
 // =====================================================================
 // MÓDULO DE GESTIÓN DE API Y CACHÉ
 // =====================================================================
@@ -7,7 +26,20 @@
 // =====================================================================
 
 // URL base de la API de D&D 5e
-const URL = "https://www.dnd5eapi.co/api"
+const URL_PRINCIPAL = "https://www.dnd5eapi.co/api"
+const URL_FALLBACK = "https://api-dnd-5e-backup.herokuapp.com/api" // This is a hypothetical backup URL
+let URL = URL_PRINCIPAL
+
+// Add a function to switch to fallback if needed
+function usarURLFallback() {
+  console.warn("⚠️ Cambiando a URL de API alternativa")
+  URL = URL_FALLBACK
+}
+
+// Add a function to reset to primary URL
+function resetearURL() {
+  URL = URL_PRINCIPAL
+}
 
 // Importación de imágenes y funciones desde otros módulos
 import { imagenRazas, imagenClases } from "./diccionarios.js"
@@ -78,6 +110,10 @@ const cache = {
       try {
         const respuesta = await fetch(`${URL}/${endpoint}`, {
           signal: controlador.signal,
+          // Add headers and credentials if needed
+          headers: {
+            Accept: "application/json",
+          },
         })
 
         // Limpiamos el timeout
@@ -103,7 +139,40 @@ const cache = {
 
         // Verificamos si fue un error de timeout
         if (fetchError.name === "AbortError") {
+          console.error(`⏱️ Timeout al conectar con la API para ${endpoint}`)
           throw new Error(`Timeout al conectar con la API para ${endpoint}`)
+        }
+
+        // Si es un error de red, intentamos una vez más después de un breve retraso
+        if (fetchError.message.includes("network") || fetchError.message.includes("fetch")) {
+          console.warn(`🔄 Error de red, reintentando para ${endpoint}...`)
+          await new Promise((resolve) => setTimeout(resolve, 2000))
+
+          try {
+            const nuevoControlador = new AbortController()
+            const nuevoTimeoutId = setTimeout(() => nuevoControlador.abort(), 10000)
+
+            const respuesta = await fetch(`${URL}/${endpoint}`, {
+              signal: nuevoControlador.signal,
+              headers: {
+                Accept: "application/json",
+              },
+            })
+
+            clearTimeout(nuevoTimeoutId)
+
+            if (!respuesta.ok) {
+              throw new Error(`Error en la API: ${respuesta.status} ${respuesta.statusText}`)
+            }
+
+            const datos = await respuesta.json()
+            this.datos[cacheKey] = datos
+            this.guardarEnLocalStorage(cacheKey, datos)
+            return datos
+          } catch (reintentarError) {
+            console.error(`❌ Reintento fallido para ${endpoint}: `, reintentarError)
+            throw reintentarError
+          }
         }
 
         // Propagamos otros errores

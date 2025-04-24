@@ -1,0 +1,92 @@
+/* Importamos los estilos base */
+@import "base.css";
+
+/* Estilos específicos para la página de personajes */
+#form__character {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.statistics {
+  display: none; /* Ocultamos los inputs originales */
+}
+
+.sectionRight__InfoCharacter {
+  max-width: 800px;
+  margin: var(--spacing-xl) auto;
+}
+
+.character__info {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  min-height: 200px; /* Altura mínima para evitar saltos en la interfaz */
+}
+
+/* Estilos para el mensaje informativo de atributos */
+.atributos-mensaje {
+  background-color: var(--color-secondary-light);
+  border-left: 4px solid var(--color-primary);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  font-style: italic;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.atributos-mensaje.oculto {
+  display: none;
+}
+
+/* Estilos responsivos */
+@media (min-width: 768px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--container-padding);
+  }
+
+  .atributos-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cofre {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  main {
+    padding: var(--spacing-md);
+  }
+
+  .atributos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cofre {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .atributos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cofre {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .atributos-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}

@@ -77,8 +77,15 @@ function deshabilitarBotonesAtributos() {
 
 // Modificar verificarHabilitacionAtributos para mostrar/ocultar el mensaje
 export function verificarHabilitacionAtributos() {
-  const razaSeleccionada = document.getElementById("races").value
-  const claseSeleccionada = document.getElementById("classes").value
+  // Get the race and class selectors
+  const razaSelector = document.getElementById("races")
+  const claseSelector = document.getElementById("classes")
+
+  // If either selector doesn't exist, exit early
+  if (!razaSelector || !claseSelector) return
+
+  const razaSeleccionada = razaSelector.value
+  const claseSeleccionada = claseSelector.value
 
   // Solo habilitamos los botones si se han seleccionado tanto raza como clase
   const habilitarBotones = razaSeleccionada && claseSeleccionada
@@ -200,12 +207,21 @@ export function obtenerModificadorAtributo(atributo) {
   return Math.floor((valorTotal - 10) / 2)
 }
 
-// Función para obtener todos los valores de atributos para guardar
+// Function to get all attribute values for saving
 export function obtenerValoresAtributos() {
   const resultado = {}
+
+  // Get values from the visible attribute displays
   Object.keys(estadoAtributos.valores).forEach((atributo) => {
     resultado[atributo] = obtenerValorTotalAtributo(atributo)
+
+    // Also update the hidden inputs for form submission
+    const hiddenInput = document.getElementById(`${atributo}_hidden`)
+    if (hiddenInput) {
+      hiddenInput.value = resultado[atributo]
+    }
   })
+
   return resultado
 }
 

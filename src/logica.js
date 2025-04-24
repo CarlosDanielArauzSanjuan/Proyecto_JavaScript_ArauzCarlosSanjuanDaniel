@@ -108,14 +108,20 @@ function guardarPersonaje(evento) {
 
   try {
     // Obtenemos los valores del formulario
-    const nombre = document.getElementById("name").value
-    const genero = document.getElementById("gender").value
-    const raza = document.getElementById("races").value
-    const clase = document.getElementById("classes").value
-    const armadura = document.getElementById("armor").value
-    const arma = document.getElementById("weapon").value
-    const habilidad = document.getElementById("ability").value
-    const accesorios = document.getElementById("accessories").value
+    const nombre = document.getElementById("name")?.value || ""
+    const genero = document.getElementById("gender")?.value || ""
+    const raza = document.getElementById("races")?.value || ""
+    const clase = document.getElementById("classes")?.value || ""
+    const armadura = document.getElementById("armor")?.value || ""
+    const arma = document.getElementById("weapon")?.value || ""
+    const habilidad = document.getElementById("ability")?.value || ""
+    const accesorios = document.getElementById("accessories")?.value || "" // Fixed spelling
+
+    // Validate required fields
+    if (!nombre || !genero || !raza || !clase) {
+      alert("Por favor, completa todos los campos obligatorios.")
+      return
+    }
 
     // Obtenemos los valores de los atributos
     const atributos = obtenerValoresAtributos()
@@ -129,7 +135,7 @@ function guardarPersonaje(evento) {
       armor: armadura,
       weapon: arma,
       ability: habilidad,
-      accesories: accesorios,
+      accessories: accesorios, // Fixed spelling from "accesories" to "accessories"
       ...atributos,
       created: Date.now(), // Timestamp de creación
     }
@@ -185,6 +191,20 @@ function inicializarPaginaDetallesPersonaje() {
 
   if (!contenedor) {
     console.warn("No se encontró el contenedor para los detalles del personaje")
+    return
+  }
+
+  // Verificamos que exista un ID en la URL
+  const urlParams = new URLSearchParams(window.location.search)
+  const personajeId = urlParams.get("id")
+
+  if (!personajeId) {
+    contenedor.innerHTML = `
+      <div class="error-message">
+        <p>No se ha especificado ningún aventurero para consultar.</p>
+        <a href="listas.html" class="back-btn">Volver al Salón de la Fama</a>
+      </div>
+    `
     return
   }
 

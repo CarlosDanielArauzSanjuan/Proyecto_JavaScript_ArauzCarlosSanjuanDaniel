@@ -1,4 +1,4 @@
-  
+
   // Mapa de qué armaduras puede usar cada clase
   export const proficienciasArmaduraClase = {
     barbarian: ["light", "medium", "shield"], // Bárbaro: ligera, media, escudo
@@ -43,3 +43,33 @@
     warlock: ["simple"], // Brujo: simples
     wizard: ["simple"], // Mago: simples
   }
+  
+  // Valores base de atributos por raza
+  export const atributosBaseRaza = {
+    dragonborn: { force: 2, dexterity: 0, constitution: 0, intelligence: 0, wisdom: 0, charisma: 1 },
+    dwarf: { force: 0, dexterity: 0, constitution: 2, intelligence: 0, wisdom: 0, charisma: 0 },
+    elf: { force: 0, dexterity: 2, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    gnome: { force: 0, dexterity: 0, constitution: 0, intelligence: 2, wisdom: 0, charisma: 0 },
+    "half-elf": { force: 0, dexterity: 1, constitution: 0, intelligence: 0, wisdom: 0, charisma: 2 },
+    "half-orc": { force: 2, dexterity: 0, constitution: 1, intelligence: 0, wisdom: 0, charisma: 0 },
+    halfling: { force: 0, dexterity: 2, constitution: 0, intelligence: 0, wisdom: 0, charisma: 0 },
+    human: { force: 1, dexterity: 1, constitution: 1, intelligence: 1, wisdom: 1, charisma: 1 },
+    tiefling: { force: 0, dexterity: 0, constitution: 0, intelligence: 1, wisdom: 0, charisma: 2 },
+  }
+  
+  // Valores recomendados de atributos por clase
+  export const atributosRecomendadosClase = {
+    barbarian: { force: 3, dexterity: 1, constitution: 2, intelligence: 0, wisdom: 1, charisma: 0 },
+    bard: { force: 0, dexterity: 2, constitution: 1, intelligence: 0, wisdom: 0, charisma: 4 },
+    cleric: { force: 0, dexterity: 0, constitution: 1, intelligence: 0, wisdom: 4, charisma: 2 },
+    druid: { force: 0, dexterity: 1, constitution: 1, intelligence: 0, wisdom: 4, charisma: 1 },
+    fighter: { force: 3, dexterity: 2, constitution: 2, intelligence: 0, wisdom: 0, charisma: 0 },
+    monk: { force: 0, dexterity: 3, constitution: 2, intelligence: 0, wisdom: 2, charisma: 0 },
+    paladin: { force: 2, dexterity: 0, constitution: 1, intelligence: 0, wisdom: 0, charisma: 4 },
+    ranger: { force: 0, dexterity: 3, constitution: 1, intelligence: 0, wisdom: 3, charisma: 0 },
+    rogue: { force: 0, dexterity: 4, constitution: 1, intelligence: 1, wisdom: 0, charisma: 1 },
+    sorcerer: { force: 0, dexterity: 1, constitution: 1, intelligence: 0, wisdom: 0, charisma: 5 },
+    warlock: { force: 0, dexterity: 1, constitution: 1, intelligence: 0, wisdom: 0, charisma: 5 },
+    wizard: { force: 0, dexterity: 1, constitution: 1, intelligence: 5, wisdom: 0, charisma: 0 },
+  }
+  

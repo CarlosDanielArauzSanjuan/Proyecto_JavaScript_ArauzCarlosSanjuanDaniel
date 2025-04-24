@@ -1,11 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dungeon & Dragons</title>
+    <title>Portal del Maestro de Mazmorras - D&D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=MedievalSharp&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script src="./src/JS/main.js" defer></script>
 </head>
 <body>
-    
+    <header
+        <h1>Portal del Maestro de Mazmorras</h1>
+    </header>
+
+    <!-- Modal de Introducción -->
+    <div id="introModal">
+        <div id="modalContent">
+            <h2>¡Saludos, aventureros de los Reinos!</h2>
+            <p>Habéis cruzado el umbral hacia el Portal del Maestro de Mazmorras, una biblioteca arcana dedicada al legendario mundo de Dungeons & Dragons.</p>
+            <button id="closeModal">Continuar la aventura</button>
+        </div>
+    </div>
+
+    <main>
+        <!-- Sección de contenido principal con video de YouTube -->
+        <section class="info__Section">
+            <div class="background-image-overlay"></div>
+            <div class="main__content">
+                <div class="main__content__left">
+                    <h1>Dungeons & Dragons</h1>
+                    <p>
+                        Dungeons & Dragons (D&D) es un legendario juego de rol de fantasía donde los jugadores crean personajes únicos y
+                        se embarcan en aventuras épicas, Ambientado en mundos mágicos llenos de dragones, mazmorras y criaturas míticas, 
+                        los jugadores utilizan imaginación, estrategia y tiradas de dados para superar desafíos y forjar historias heroicas.
+                    </p>
+                </div>
+                <div class="main__content__Right">
+                    <iframe
+                        src="https://www.youtube.com/embed/lkjoLmStBUI"
+                        title="YouTube video player"
+                        frameborder="1"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+            </div>
+        </section>
+
+        <div id="conversation-container">
+            <!-- Los diálogos se cargarán aquí desde JavaScript -->
+        </div>
+        
+        <div id="navigation">
+            <!-- El botón de saltar diálogos se añadirá aquí por JavaScript -->
+            <button id="prevDialog">Diálogo Anterior</button>
+            <button id="nextDialog">Siguiente Diálogo</button>
+        </div>
+        
+        <!-- El botón de continuar a la página principal se añadirá aquí por JavaScript -->
+    </main>
+
+    <footer>
+        <p>Portal del Maestro de Mazmorras - Un grimorio no oficial para Dungeons & Dragons</p>
+        <div class="div__footer">
+            <p>Creado por Daniel Arauz y la Orden de los Escribas Arcanos</p>
+            <p>2025</p>
+        </div>
+    </footer>
 </body>
 </html>

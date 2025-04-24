@@ -8,43 +8,43 @@
 
 // Función para cargar la lista de personajes desde localStorage
 export function cargarListaPersonajes(contenedor) {
-    try {
-      // Obtenemos los personajes guardados en localStorage
-      const personajesGuardados = JSON.parse(localStorage.getItem("dnd_personajes")) || []
-  
-      // Si no hay personajes, mostramos un mensaje
-      if (personajesGuardados.length === 0) {
-        contenedor.innerHTML = `
+  try {
+    // Obtenemos los personajes guardados en localStorage
+    const personajesGuardados = JSON.parse(localStorage.getItem("dnd_personajes")) || []
+
+    // Si no hay personajes, mostramos un mensaje
+    if (personajesGuardados.length === 0) {
+      contenedor.innerHTML = `
           <div class="empty-list">
             <p>Aún no hay aventureros inscritos en los Pergaminos del Destino.</p>
             <p>¡Sé el primero en forjar tu leyenda!</p>
             <a href="personajes.html" class="create-character-btn">Forjar un Aventurero</a>
           </div>
         `
-        return
-      }
-  
-      // Ordenamos los personajes por fecha de creación (más recientes primero)
-      personajesGuardados.sort((a, b) => b.created - a.created)
-  
-      // Creamos el HTML para cada personaje
-      let listaHTML = ""
-  
-      personajesGuardados.forEach((personaje, index) => {
-        // Determinamos la clase CSS para el tipo de personaje (para estilos visuales)
-        let tipoClase = "guerrero" // Por defecto
-        if (personaje.classes) {
-          if (["wizard", "sorcerer", "warlock"].includes(personaje.classes)) {
-            tipoClase = "mago"
-          } else if (["rogue", "bard"].includes(personaje.classes)) {
-            tipoClase = "picaro"
-          } else if (["cleric", "paladin"].includes(personaje.classes)) {
-            tipoClase = "clerigo"
-          }
+      return
+    }
+
+    // Ordenamos los personajes por fecha de creación (más recientes primero)
+    personajesGuardados.sort((a, b) => b.created - a.created)
+
+    // Creamos el HTML para cada personaje
+    let listaHTML = ""
+
+    personajesGuardados.forEach((personaje, index) => {
+      // Determinamos la clase CSS para el tipo de personaje (para estilos visuales)
+      let tipoClase = "guerrero" // Por defecto
+      if (personaje.classes) {
+        if (["wizard", "sorcerer", "warlock"].includes(personaje.classes)) {
+          tipoClase = "mago"
+        } else if (["rogue", "bard"].includes(personaje.classes)) {
+          tipoClase = "picaro"
+        } else if (["cleric", "paladin"].includes(personaje.classes)) {
+          tipoClase = "clerigo"
         }
-  
-        // Creamos la tarjeta del personaje
-        listaHTML += `
+      }
+
+      // Creamos la tarjeta del personaje
+      listaHTML += `
           <div class="character-card ${tipoClase}">
             <div class="character-header">
               <h2>${personaje.name || "Aventurero sin nombre"}</h2>
@@ -87,74 +87,74 @@ export function cargarListaPersonajes(contenedor) {
             </div>
           </div>
         `
-      })
-  
-      // Insertamos el HTML en el contenedor
-      contenedor.innerHTML = listaHTML
-    } catch (error) {
-      console.error("❌ Error al cargar la lista de personajes:", error)
-      contenedor.innerHTML = `
+    })
+
+    // Insertamos el HTML en el contenedor
+    contenedor.innerHTML = listaHTML
+  } catch (error) {
+    console.error("❌ Error al cargar la lista de personajes:", error)
+    contenedor.innerHTML = `
         <div class="error-message">
           <p>Ha ocurrido un error al consultar los Pergaminos del Destino.</p>
           <p>Error: ${error.message}</p>
         </div>
       `
-    }
   }
-  
-  // Función para cargar los detalles de un personaje específico
-  export function cargarDetallesPersonaje(contenedor) {
-    try {
-      // Obtenemos el ID del personaje de la URL
-      const urlParams = new URLSearchParams(window.location.search)
-      const personajeId = urlParams.get("id")
-  
-      // Si no hay ID, mostramos un error
-      if (personajeId === null) {
-        contenedor.innerHTML = `
+}
+
+// Función para cargar los detalles de un personaje específico
+export function cargarDetallesPersonaje(contenedor) {
+  try {
+    // Obtenemos el ID del personaje de la URL
+    const urlParams = new URLSearchParams(window.location.search)
+    const personajeId = urlParams.get("id")
+
+    // Si no hay ID, mostramos un error
+    if (personajeId === null) {
+      contenedor.innerHTML = `
           <div class="error-message">
             <p>No se ha especificado ningún aventurero para consultar.</p>
-            <a href="lista.html" class="back-btn">Volver al Salón de la Fama</a>
+            <a href="listas.html" class="back-btn">Volver al Salón de la Fama</a>
           </div>
         `
-        return
-      }
-  
-      // Obtenemos los personajes guardados en localStorage
-      const personajesGuardados = JSON.parse(localStorage.getItem("dnd_personajes")) || []
-  
-      // Obtenemos el personaje específico
-      const personaje = personajesGuardados[personajeId]
-  
-      // Si no existe el personaje, mostramos un error
-      if (!personaje) {
-        contenedor.innerHTML = `
+      return
+    }
+
+    // Obtenemos los personajes guardados en localStorage
+    const personajesGuardados = JSON.parse(localStorage.getItem("dnd_personajes")) || []
+
+    // Obtenemos el personaje específico
+    const personaje = personajesGuardados[personajeId]
+
+    // Si no existe el personaje, mostramos un error
+    if (!personaje) {
+      contenedor.innerHTML = `
           <div class="error-message">
             <p>El aventurero solicitado no existe en los Pergaminos del Destino.</p>
-            <a href="lista.html" class="back-btn">Volver al Salón de la Fama</a>
+            <a href="listas.html" class="back-btn">Volver al Salón de la Fama</a>
           </div>
         `
-        return
+      return
+    }
+
+    // Formateamos la fecha de creación
+    const fechaCreacion = new Date(personaje.created)
+    const fechaFormateada = `${fechaCreacion.getDate()}/${fechaCreacion.getMonth() + 1}/${fechaCreacion.getFullYear()}`
+
+    // Determinamos la clase CSS para el tipo de personaje (para estilos visuales)
+    let tipoClase = "guerrero" // Por defecto
+    if (personaje.classes) {
+      if (["wizard", "sorcerer", "warlock"].includes(personaje.classes)) {
+        tipoClase = "mago"
+      } else if (["rogue", "bard"].includes(personaje.classes)) {
+        tipoClase = "picaro"
+      } else if (["cleric", "paladin"].includes(personaje.classes)) {
+        tipoClase = "clerigo"
       }
-  
-      // Formateamos la fecha de creación
-      const fechaCreacion = new Date(personaje.created)
-      const fechaFormateada = `${fechaCreacion.getDate()}/${fechaCreacion.getMonth() + 1}/${fechaCreacion.getFullYear()}`
-  
-      // Determinamos la clase CSS para el tipo de personaje (para estilos visuales)
-      let tipoClase = "guerrero" // Por defecto
-      if (personaje.classes) {
-        if (["wizard", "sorcerer", "warlock"].includes(personaje.classes)) {
-          tipoClase = "mago"
-        } else if (["rogue", "bard"].includes(personaje.classes)) {
-          tipoClase = "picaro"
-        } else if (["cleric", "paladin"].includes(personaje.classes)) {
-          tipoClase = "clerigo"
-        }
-      }
-  
-      // Creamos el HTML con los detalles completos del personaje
-      const detallesHTML = `
+    }
+
+    // Creamos el HTML con los detalles completos del personaje
+    const detallesHTML = `
         <div class="character-details ${tipoClase}">
           <div class="character-header">
             <h1>${personaje.name || "Aventurero sin nombre"}</h1>
@@ -226,22 +226,21 @@ export function cargarListaPersonajes(contenedor) {
             <div class="character-creation-date">
               Inscrito en los Pergaminos del Destino el ${fechaFormateada}
             </div>
-            <a href="lista.html" class="back-btn">Volver al Salón de la Fama</a>
+            <a href="listas.html" class="back-btn">Volver al Salón de la Fama</a>
           </div>
         </div>
       `
-  
-      // Insertamos el HTML en el contenedor
-      contenedor.innerHTML = detallesHTML
-    } catch (error) {
-      console.error("❌ Error al cargar los detalles del personaje:", error)
-      contenedor.innerHTML = `
+
+    // Insertamos el HTML en el contenedor
+    contenedor.innerHTML = detallesHTML
+  } catch (error) {
+    console.error("❌ Error al cargar los detalles del personaje:", error)
+    contenedor.innerHTML = `
         <div class="error-message">
           <p>Ha ocurrido un error al consultar el Pergamino del Aventurero.</p>
           <p>Error: ${error.message}</p>
-          <a href="lista.html" class="back-btn">Volver al Salón de la Fama</a>
+          <a href="listas.html" class="back-btn">Volver al Salón de la Fama</a>
         </div>
       `
-    }
   }
-  
+}

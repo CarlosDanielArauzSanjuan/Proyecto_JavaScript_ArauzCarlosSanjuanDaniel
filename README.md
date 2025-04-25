@@ -32,6 +32,10 @@ Este proyecto es un compendio interactivo para Dungeons & Dragons, desarrollado 
 * LocalStorage: Almacenamiento local para el inventario
 * Fetch API: Obtención de datos
 
+## 📊 Presentación del Proyecto
+
+Puedes ver las diapositivas de la presentación aquí: [Ver Diapositivas](https://docs.google.com/presentation/d/1T7y1xPDWH-0rHy-M13DdLH45o9FMSj8OQKBqlhyY-iU/edit?usp=sharing)
+
 ## ⬇️ Instalación
 Clona este repositorio: https://github.com/CarlosDanielArauzSanjuan/Proyecto_JavaScript_ArauzCarlosSanjuanDaniel
 

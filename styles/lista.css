@@ -1,6 +1,7 @@
 /* Importamos los estilos base */
 @import "base.css";
-*  { letter-spacing: 1px;
+* {
+  letter-spacing: 1px;
 }
 /* Estilos específicos para la página de lista de personajes */
 #listCharacters {
@@ -11,10 +12,10 @@
   margin: 0 auto;
   position: relative;
   width: 100%;
-  max-width: 1400px; 
+  max-width: 1400px;
   justify-content: center;
   align-items: center;
-  text-align: center;/* Aumentado para aprovechar más espacio */
+  text-align: center; /* Aumentado para aprovechar más espacio */
 }
 
 .intro-text {

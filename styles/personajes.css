@@ -14,7 +14,6 @@ main {
   background-position: center;
   font-weight: lighter;
   letter-spacing: 1px;
-
 }
 
 .page-title {
@@ -121,9 +120,8 @@ main {
 #form__character label {
   color: var(--color-secondary);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  font-weight:lighter;
+  font-weight: lighter;
   font-size: 25px;
-
   margin-top: var(--spacing-md);
   position: relative;
   transition: transform 0.2s ease;
@@ -229,7 +227,6 @@ main {
   width: 100%;
   animation: fadeIn 0.5s ease;
   text-align: center;
-
 }
 
 .character__info img {
@@ -255,8 +252,8 @@ main {
   border-bottom: 1px dashed var(--color-gray);
 }
 
-.info-section p{
-font-size: 14px;
+.info-section p {
+  font-size: 14px;
 }
 
 .info-section:last-child {
@@ -521,7 +518,6 @@ font-size: 14px;
   text-align: center;
   font-size: 20px;
   letter-spacing: 2px;
-
 }
 
 /* Filas del cofre para organizar los elementos */
@@ -549,7 +545,6 @@ font-size: 14px;
   width: 100%;
   font-size: larger;
   letter-spacing: 2px;
-
 }
 
 .cofre-item:hover {
@@ -574,7 +569,7 @@ font-size: 14px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.cofre-item:hover  {
+.cofre-item:hover {
   box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
   border-color: var(--color-secondary);
 }
@@ -606,7 +601,6 @@ font-size: 14px;
   text-align: center;
   font-size: var(--font-size-sm);
   letter-spacing: 2px;
-
 }
 
 .cofre-item:hover .cofre-item-nombre {

@@ -226,8 +226,7 @@ h1 {
   font-size: var(--font-size-3xl);
   position: relative;
   display: inline-block;
-  margin: 30px 0px 0px 40px ;
-  
+  margin: 30px 0px 0px 40px;
 }
 
 h1::after {
@@ -309,6 +308,69 @@ header {
   flex-direction: column;
   align-items: center;
   padding-left: 30px;
+}
+
+/* Estilos para el header con imágenes decorativas */
+.header-decorations {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+}
+
+.header-icon {
+  height: 60px;
+  width: auto;
+  margin: 0 15px;
+  filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.7));
+  transition: transform 0.3s ease;
+}
+
+.header-icon:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.dragon-icon {
+  animation: float 4s ease-in-out infinite;
+}
+
+.dice-icon {
+  animation: bounce 3s ease-in-out infinite;
+}
+
+.grimoire-icon {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.sword-icon {
+  animation: float 5s ease-in-out infinite alternate;
+}
+
+/* Responsive styles for header icons */
+@media (max-width: 992px) {
+  .header-icon {
+    height: 40px;
+    margin: 0 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-icon {
+    height: 30px;
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  .header-decorations {
+    flex-wrap: wrap;
+  }
+
+  .header-icon {
+    height: 25px;
+    margin: 5px;
+  }
 }
 
 .header-container {

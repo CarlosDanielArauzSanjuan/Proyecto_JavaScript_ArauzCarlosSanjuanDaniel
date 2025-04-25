@@ -209,7 +209,7 @@ export const imagenHechizos = {
   sleep: "./assets/img/arcanos/sleep.webp",
 
   // Imagen por defecto para todos los dones arcanos sin imagen específica
-  default: "./assets/img/arcanos/default.webp",
+  default: "./assets/img/arcanos/default-spell.png",
 }
 
 // Mapeo de imágenes para género

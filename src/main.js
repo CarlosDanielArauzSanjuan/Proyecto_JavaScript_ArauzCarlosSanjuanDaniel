@@ -69,20 +69,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevButton = document.getElementById("prevDialog") // Botón para diálogo anterior
   const nextButton = document.getElementById("nextDialog") // Botón para siguiente diálogo
   const navigationContainer = document.getElementById("navigation") // Contenedor de navegación
+  const skipAllButton = document.getElementById("skipAll") // Botón para saltar todos los diálogos
 
   // Solo continuamos si estamos en la página correcta con los elementos necesarios
   if (!dialogContainer || !navigationContainer) return
 
-  // Crear botón para saltar todos los diálogos
-  const skipAllButton = document.createElement("button")
-  skipAllButton.id = "skipAll"
-  skipAllButton.textContent = "Saltar la Narración"
-  skipAllButton.title = "Saltar directamente al final de la historia"
-  navigationContainer.prepend(skipAllButton) // Añade el botón al inicio del contenedor de navegación
-
   // Crear botón para continuar a la página principal
   const continueButton = document.createElement("button")
   continueButton.id = "continueToMain"
+  continueButton.className = "dnd-button"
   continueButton.textContent = "Comenzar la Aventura"
   continueButton.title = "Continuar a la creación de personajes"
   continueButton.style.display = "none" // Inicialmente oculto
@@ -195,12 +190,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (continueButton) continueButton.style.display = "block" // Muestra el botón de continuar
       if (prevButton) prevButton.style.display = "none" // Oculta botones de navegación
       if (nextButton) nextButton.style.display = "none"
-      if (skipAllButton) skipAllButton.style.display = "none"
+      if (skipAllButton) skipAllButton.style.display = "none" // Oculta el botón de saltar
     } else {
       if (continueButton) continueButton.style.display = "none" // Oculta el botón de continuar
       if (prevButton) prevButton.style.display = "block" // Muestra botones de navegación
       if (nextButton) nextButton.style.display = "block"
-      if (skipAllButton) skipAllButton.style.display = "block"
+      if (skipAllButton) skipAllButton.style.display = "block" // Muestra el botón de saltar
     }
   }
 
@@ -235,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (continueButton) {
     continueButton.addEventListener("click", () => {
       // Redirigir a la página de personajes
-      window.location.href = "../personajes.html"
+      window.location.href = "personajes.html"
     })
   }
 

@@ -10,17 +10,23 @@
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="./assets/Dungeons-and-Dragons-logo.png" alt="Logo D&D">
+        <div class="header-decorations">
+            <img src="./assets/dragon.png" alt="Dragón" class="header-icon dragon-icon">
+            <img src="./assets/img/backgrounds/dice.png" alt="Dados" class="header-icon dice-icon">
+            <div class="logo">
+                <img src="./assets/Dungeons-and-Dragons-logo.png" alt="Logo D&D">
+            </div>
+            <img src="./assets/img/backgrounds/dados.jpg" alt="Grimorio" class="header-icon grimoire-icon">
+            <img src="./assets/img/backgrounds/espadas.png" alt="Espada" class="header-icon sword-icon">
         </div>
     </header>
 
     <!-- Modal de Introducción -->
     <div id="introModal">
-        <div id="modalContent">
+        <div id="modalContent" class="modal-container">
             <h2>¡Saludos, aventureros de los Reinos!</h2>
             <p>Habéis cruzado el umbral hacia el Portal del Maestro de Mazmorras, una biblioteca arcana dedicada al legendario mundo de Dungeons & Dragons.</p>
-            <button id="closeModal">Continuar la aventura</button>
+            <button id="closeModal" class="dnd-button">Continuar la aventura</button>
         </div>
     </div>
 
@@ -31,7 +37,7 @@
             <div class="main__content">
                 <div class="main__content__left">
                     <img src="./assets/Dungeons-and-Dragons-logo.png" alt="Logo D&D">
-                    <p>
+                    <p> <br>
                         (D&D) es un legendario juego de rol de fantasía donde los jugadores crean personajes únicos y
                         se embarcan en aventuras épicas, Ambientado en mundos mágicos llenos de dragones, mazmorras y criaturas míticas, 
                         los jugadores utilizan imaginación, estrategia y tiradas de dados para superar desafíos y forjar historias heroicas.
@@ -49,14 +55,16 @@
             </div>
         </section>
 
-        <div id="conversation-container">
+        <div id="conversation-container" class="dialog-container">
             <!-- Los diálogos se cargarán aquí desde JavaScript -->
         </div>
         
         <div id="navigation">
-            <!-- El botón de saltar diálogos se añadirá aquí por JavaScript -->
-            <button id="prevDialog">Diálogo Anterior</button>
-            <button id="nextDialog">Siguiente Diálogo</button>
+            <button id="prevDialog" class="dnd-button">Diálogo Anterior</button>
+            <button id="nextDialog" class="dnd-button">Siguiente Diálogo</button>
+            <div class="skip-container">
+                <button id="skipAll" class="dnd-button skip-button">Saltar la Narración</button>
+            </div>
         </div>
         
         <!-- El botón de continuar a la página principal se añadirá aquí por JavaScript -->
